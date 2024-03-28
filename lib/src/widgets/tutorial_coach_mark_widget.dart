@@ -74,55 +74,51 @@ class TutorialCoachMarkWidgetState extends State<TutorialCoachMarkWidget>
   Widget build(BuildContext context) {
     return Material(
       type: MaterialType.transparency,
-      child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          return Stack(
-            children: <Widget>[
-              AnimatedFocusLight(
-                key: _focusLightKey,
-                targets: widget.targets,
-                finish: widget.finish,
-                paddingFocus: widget.paddingFocus,
-                colorShadow: widget.colorShadow,
-                opacityShadow: widget.opacityShadow,
-                focusAnimationDuration: widget.focusAnimationDuration,
-                unFocusAnimationDuration: widget.unFocusAnimationDuration,
-                pulseAnimationDuration: widget.pulseAnimationDuration,
-                pulseVariation: widget.pulseVariation,
-                pulseEnable: widget.pulseEnable,
-                rootOverlay: widget.rootOverlay,
-                imageFilter: widget.imageFilter,
-                clickTarget: (target) {
-                  return widget.clickTarget?.call(target);
-                },
-                clickTargetWithTapPosition: (target, tapDetails) {
-                  return widget.onClickTargetWithTapPosition
-                      ?.call(target, tapDetails);
-                },
-                clickOverlay: (target) {
-                  return widget.clickOverlay?.call(target);
-                },
-                focus: (target) {
-                  setState(() {
-                    currentTarget = target;
-                    showContent = true;
-                  });
-                },
-                removeFocus: () {
-                  setState(() {
-                    showContent = false;
-                  });
-                },
-              ),
-              AnimatedOpacity(
-                opacity: showContent ? 1 : 0,
-                duration: const Duration(milliseconds: 300),
-                child: _buildContents(),
-              ),
-              _buildSkip()
-            ],
-          );
-        },
+      child: Stack(
+        children: <Widget>[
+          AnimatedFocusLight(
+            key: _focusLightKey,
+            targets: widget.targets,
+            finish: widget.finish,
+            paddingFocus: widget.paddingFocus,
+            colorShadow: widget.colorShadow,
+            opacityShadow: widget.opacityShadow,
+            focusAnimationDuration: widget.focusAnimationDuration,
+            unFocusAnimationDuration: widget.unFocusAnimationDuration,
+            pulseAnimationDuration: widget.pulseAnimationDuration,
+            pulseVariation: widget.pulseVariation,
+            pulseEnable: widget.pulseEnable,
+            rootOverlay: widget.rootOverlay,
+            imageFilter: widget.imageFilter,
+            clickTarget: (target) {
+              return widget.clickTarget?.call(target);
+            },
+            clickTargetWithTapPosition: (target, tapDetails) {
+              return widget.onClickTargetWithTapPosition
+                  ?.call(target, tapDetails);
+            },
+            clickOverlay: (target) {
+              return widget.clickOverlay?.call(target);
+            },
+            focus: (target) {
+              setState(() {
+                currentTarget = target;
+                showContent = true;
+              });
+            },
+            removeFocus: () {
+              setState(() {
+                showContent = false;
+              });
+            },
+          ),
+          AnimatedOpacity(
+            opacity: showContent ? 1 : 0,
+            duration: const Duration(milliseconds: 300),
+            child: _buildContents(),
+          ),
+          _buildSkip()
+        ],
       ),
     );
   }

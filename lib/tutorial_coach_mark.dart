@@ -65,33 +65,29 @@ class TutorialCoachMark {
   OverlayEntry _buildOverlay({bool rootOverlay = false}) {
     return OverlayEntry(
       builder: (context) {
-        return LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return TutorialCoachMarkWidget(
-              key: _widgetKey,
-              targets: targets,
-              clickTarget: onClickTarget,
-              onClickTargetWithTapPosition: onClickTargetWithTapPosition,
-              clickOverlay: onClickOverlay,
-              paddingFocus: paddingFocus,
-              onClickSkip: skip,
-              alignSkip: alignSkip,
-              skipWidget: skipWidget,
-              textSkip: textSkip,
-              textStyleSkip: textStyleSkip,
-              hideSkip: hideSkip,
-              colorShadow: colorShadow,
-              opacityShadow: opacityShadow,
-              focusAnimationDuration: focusAnimationDuration,
-              unFocusAnimationDuration: unFocusAnimationDuration,
-              pulseAnimationDuration: pulseAnimationDuration,
-              pulseEnable: pulseEnable,
-              finish: finish,
-              rootOverlay: rootOverlay,
-              showSkipInLastTarget: showSkipInLastTarget,
-              imageFilter: imageFilter,
-            );
-          },
+        return TutorialCoachMarkWidget(
+          key: _widgetKey,
+          targets: targets,
+          clickTarget: onClickTarget,
+          onClickTargetWithTapPosition: onClickTargetWithTapPosition,
+          clickOverlay: onClickOverlay,
+          paddingFocus: paddingFocus,
+          onClickSkip: skip,
+          alignSkip: alignSkip,
+          skipWidget: skipWidget,
+          textSkip: textSkip,
+          textStyleSkip: textStyleSkip,
+          hideSkip: hideSkip,
+          colorShadow: colorShadow,
+          opacityShadow: opacityShadow,
+          focusAnimationDuration: focusAnimationDuration,
+          unFocusAnimationDuration: unFocusAnimationDuration,
+          pulseAnimationDuration: pulseAnimationDuration,
+          pulseEnable: pulseEnable,
+          finish: finish,
+          rootOverlay: rootOverlay,
+          showSkipInLastTarget: showSkipInLastTarget,
+          imageFilter: imageFilter,
         );
       },
     );
