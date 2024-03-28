@@ -60,7 +60,7 @@ class AnimatedFocusLight extends StatefulWidget {
 }
 
 abstract class AnimatedFocusLightState extends State<AnimatedFocusLight>
-    with TickerProviderStateMixin {
+    with TickerProviderStateMixin, WidgetsBindingObserver {
   final borderRadiusDefault = 10.0;
   final defaultFocusAnimationDuration = const Duration(milliseconds: 600);
   late AnimationController _controller;
@@ -92,10 +92,18 @@ abstract class AnimatedFocusLightState extends State<AnimatedFocusLight>
     );
 
     Future.delayed(Duration.zero, _runFocus);
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeMetrics() {
+    super.didChangeMetrics();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _runFocus());
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _controller.dispose();
     super.dispose();
   }
