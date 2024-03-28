@@ -98,7 +98,38 @@ abstract class AnimatedFocusLightState extends State<AnimatedFocusLight>
   @override
   void didChangeMetrics() {
     super.didChangeMetrics();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _runFocus());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      TargetPosition? targetPosition;
+      try {
+        targetPosition = getTargetCurrent(
+          _targetFocus,
+          rootOverlay: widget.rootOverlay,
+        );
+      } on NotFoundTargetException catch (e, s) {
+        debugPrint(e.toString());
+        debugPrintStack(stackTrace: s);
+      }
+
+      if (targetPosition == null) {
+        _finish();
+        return;
+      }
+
+      safeSetState(() {
+        _targetPosition = targetPosition!;
+
+        _positioned = Offset(
+          targetPosition.offset.dx + (targetPosition.size.width / 2),
+          targetPosition.offset.dy + (targetPosition.size.height / 2),
+        );
+
+        if (targetPosition.size.height > targetPosition.size.width) {
+          _sizeCircle = targetPosition.size.height * 0.6 + _getPaddingFocus();
+        } else {
+          _sizeCircle = targetPosition.size.width * 0.6 + _getPaddingFocus();
+        }
+      });
+    });
   }
 
   @override
